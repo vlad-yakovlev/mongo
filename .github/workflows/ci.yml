@@ -10,7 +10,6 @@ concurrency: ci
 
 jobs:
   deploy:
-    needs: checks
     if: github.repository == 'vlad-yakovlev/mongo' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
