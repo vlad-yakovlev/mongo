@@ -16,7 +16,7 @@ services:
         test $$(mongo --quiet --eval "rs.initiate({ _id: 'rs0', members: [{ _id: 0, host: 'mongo' }] }).ok || rs.status().ok") -eq 1
       interval: 10s
       start_period: 30s
-    command: '--bind_ip_all --replSet rs0'
+    command: "--bind_ip_all --replSet rs0"
     restart: always
 
   mongo-backup:
