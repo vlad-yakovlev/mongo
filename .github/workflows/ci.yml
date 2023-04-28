@@ -13,7 +13,7 @@ jobs:
     if: github.repository == 'vlad-yakovlev/mongo' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy to Digital Ocean droplet via SSH action
+      - name: Deploy to Digital Ocean droplet
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -24,3 +24,4 @@ jobs:
             cd Projects/mongo
             git pull
             docker compose up -d --build
+            docker builder prune -af
