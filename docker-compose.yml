@@ -4,7 +4,7 @@ networks:
 
 services:
   mongo:
-    image: mongo:5.0
+    image: mongo:5.0.17
     networks:
       - vlad-yakovlev-dev
     ports:
@@ -17,4 +17,22 @@ services:
       interval: 10s
       start_period: 30s
     command: '--bind_ip_all --replSet rs0'
+    restart: always
+
+  mongo-backup:
+    image: ghcr.io/tiredofit/docker-db-backup:3.9.0
+    networks:
+      - vlad-yakovlev-dev
+    volumes:
+      - $PWD/backups:/backups
+    environment:
+      CONTAINER_ENABLE_MONITORING: FALSE
+      DB_TYPE: mongo
+      DB_HOST: mongo
+      DB_NAME: ALL
+      DB_DUMP_TARGET: /backups
+      # Backup every hour
+      DB_DUMP_FREQ: 60
+      # Cleanup backups older than 10 days
+      DB_CLEANUP_TIME: 14400
     restart: always
