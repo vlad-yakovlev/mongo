@@ -4,7 +4,8 @@ networks:
 
 services:
   mongo:
-    image: mongo:5.0.17
+    image: mongo:5.0
+    pull_policy: always
     networks:
       - vlad-yakovlev-dev
     ports:
@@ -20,7 +21,8 @@ services:
     restart: always
 
   mongo-backup:
-    image: ghcr.io/tiredofit/docker-db-backup:3.9.0
+    image: ghcr.io/tiredofit/docker-db-backup:latest
+    pull_policy: always
     networks:
       - vlad-yakovlev-dev
     volumes:
